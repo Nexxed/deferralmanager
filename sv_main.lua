@@ -66,6 +66,11 @@ AddEventHandler("playerConnecting", function(_, __, deferrals)
 
         -- call the current hook with the source and our new deferrals object
         hook(src, obj)
+            
+        -- wait for the hook to complete
+        while(not complete) do
+            Wait(0)
+        end
 
         -- if the rejection text is set, then reject the connecting player with its contents
         if(rejectionText ~= nil) then
