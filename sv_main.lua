@@ -66,6 +66,12 @@ AddEventHandler("playerConnecting", function(_, __, deferrals)
 
         -- call the current hook with the source and our new deferrals object
         hook(src, obj)
+            
+        -- Check if joining was cancelled via CancelEvent()
+        if WasEventCancelled() then
+            hasCancelled = true
+            break
+        end
 
         -- if the rejection text is set, then reject the connecting player with its contents
         if(rejectionText ~= nil) then
